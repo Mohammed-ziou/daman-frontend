@@ -14,30 +14,31 @@ function Homepage() {
   const { user } = useSelector((state) => state.auth);
   return (
     <>
-      <div className="container">
+      <div className="container justify-content-evenly">
         <div className="row">
           <h1>Daman Forms Survey</h1>
           <p>A service for making Survey forms for the Daman insituition</p>
+          <p>Welcome {user?.name ? user.name : ""}</p>
         </div>
         <div className="row">
           {!user ? (
             <>
               <div className="col-12 col-md-6">
-                <button className="btn btn-primary">
-                  <Link to="/login"> Login</Link>
-                </button>
+                <Link to="/login">
+                  <button className="btn btn-primary">Login</button>
+                </Link>
               </div>
               <div className="col-12 col-md-6">
-                <button className="btn btn-secondary">
-                  <Link to="/register">Register</Link>
-                </button>
+                <Link to="/register">
+                  <button className="btn btn-secondary">Register</button>
+                </Link>
               </div>
             </>
           ) : (
             <div className="col-12">
-              <button className="btn btn-secondary">
-                <Link to="/forms">Build Forms</Link>
-              </button>
+              <Link to="/forms">
+                <button className="btn btn-secondary">Build Forms</button>
+              </Link>
             </div>
           )}
         </div>

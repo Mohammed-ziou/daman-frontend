@@ -21,9 +21,9 @@ import FirstPageIcon from "@material-ui/icons/FirstPage";
 import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 import LastPageIcon from "@material-ui/icons/LastPage";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { deleteUser } from "../../redux/users/userSlice";
+// import { Link } from "react-router-dom";
+// import { useDispatch } from "react-redux";
+// import { deleteUser } from "../../redux/users/userSlice";
 
 const useStyles1 = makeStyles((theme) => ({
   root: {

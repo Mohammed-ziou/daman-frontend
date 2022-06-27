@@ -1,6 +1,7 @@
 .MuiDrawer-paper {
   min-width: 20%;
-  padding: 5% 1%;
+  padding: 5% 2%;
+  background-color: aliceblue !important;
 }
 .drawer-heading {
   margin-bottom: 1.5rem !important;

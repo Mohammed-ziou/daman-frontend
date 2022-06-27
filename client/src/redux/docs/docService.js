@@ -28,6 +28,17 @@ const getForms = async (token, querys) => {
   return response.data;
 };
 
+// get all forms count
+const getFormsCount = async (token) => {
+  const config = {
+    headers: {
+      token: `Bearer ${token}`,
+    },
+  };
+  const response = await axios.get(API_URL + "count", config);
+  return response.data;
+};
+
 // get one forms
 const getForm = async (docId, token) => {
   const config = {
@@ -70,6 +81,7 @@ const docService = {
   deleteForm,
   getForm,
   updateForm,
+  getFormsCount,
 };
 
 export default docService;

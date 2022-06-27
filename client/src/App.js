@@ -12,6 +12,7 @@ import EditForm from "./pages/Forms/EditForm";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./pages/logReg/Login";
 import Register from "./pages/logReg/Register";
+import FormReportPage from "./pages/Reportpage/FormReportPage/FormReportPage";
 // import SingleForm from "./pages/SingleForm/SingleForm";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/form/edit/:id" element={<EditForm />} />
           <Route path="/forms/new" element={<NewForm />} />
           <Route path="/reports" element={<Reportpage />} />
+          <Route path="/reports/:id" element={<FormReportPage />} />
           <Route path="/users" element={<Userpage />} />
           {/* <Route path="/edituser/:id" element={<EditUser />} /> */}
           <Route path="*" element={<Navigate to="/" replace />} />

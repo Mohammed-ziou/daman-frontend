@@ -5,6 +5,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Paper,
   SwipeableDrawer,
   Typography,
 } from "@material-ui/core";
@@ -51,80 +52,87 @@ function Drawer() {
           onOpen={toggleDrawer("left", true)}
           anchor={"left"}
         >
-          <Typography variant="h4" className="drawer-heading">
-            Daman Survey
-          </Typography>
-          <Divider />
-          <div>
-            <List>
-              <Link className="list-items-links" to="/">
-                <ListItem button key={"survey"} className={"list-items"}>
-                  <ListItemIcon>
-                    <FormatAlignLeft />
-                  </ListItemIcon>
-                  <ListItemText primary={"Survey"} />
-                </ListItem>
-              </Link>
-            </List>
-            <List>
-              <Link className="list-items-links" to="/reports">
-                <ListItem button key={"reports"} className={"list-items"}>
-                  <ListItemIcon>
-                    <AssessmentOutlined />
-                  </ListItemIcon>
-                  <ListItemText primary={"Reports"} />
-                </ListItem>
-              </Link>
-            </List>
+          <Paper className="p-4">
+            <Typography variant="h4" className="drawer-heading">
+              Daman Survey
+            </Typography>
+
             <Divider />
-            <List>
-              <Link className="list-items-links" to="/users">
-                <ListItem button key={"users"} className={"list-items"}>
-                  <ListItemIcon>
-                    <PeopleAltOutlined />
-                  </ListItemIcon>
-                  <ListItemText primary={"Users"} />
-                </ListItem>
-              </Link>
-            </List>
-            {user ? (
-              <React.Fragment>
-                <Divider />
-                <List>
-                  <button className="logout-btn" onClick={handleLogOut}>
-                    <ListItem button key={"users"} className={"list-items"}>
-                      <ListItemIcon>
-                        <ExitToApp />
-                      </ListItemIcon>
-                      <ListItemText primary={"Log out"} />
-                    </ListItem>
-                  </button>
-                </List>
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                <Divider />
-                <List>
+            <div>
+              <List>
+                <Link className="list-items-links" to="/">
+                  <ListItem button key={"survey"} className={"list-items"}>
+                    <ListItemIcon>
+                      <FormatAlignLeft />
+                    </ListItemIcon>
+                    <ListItemText primary={"Survey"} />
+                  </ListItem>
+                </Link>
+              </List>
+              <List>
+                <Link className="list-items-links" to="/reports">
+                  <ListItem button key={"reports"} className={"list-items"}>
+                    <ListItemIcon>
+                      <AssessmentOutlined />
+                    </ListItemIcon>
+                    <ListItemText primary={"Reports"} />
+                  </ListItem>
+                </Link>
+              </List>
+              <Divider />
+              <List>
+                {user.isAdmin ? (
                   <Link className="list-items-links" to="/users">
                     <ListItem button key={"users"} className={"list-items"}>
                       <ListItemIcon>
-                        <ExitToAppOutlined />
+                        <PeopleAltOutlined />
                       </ListItemIcon>
-                      <ListItemText primary={"Login"} />
+                      <ListItemText primary={"Users"} />
                     </ListItem>
                   </Link>
-                  <Link className="list-items-links" to="/users">
-                    <ListItem button key={"users"} className={"list-items"}>
-                      <ListItemIcon>
-                        <Person />
-                      </ListItemIcon>
-                      <ListItemText primary={"Register"} />
-                    </ListItem>
-                  </Link>
-                </List>
-              </React.Fragment>
-            )}
-          </div>
+                ) : (
+                  console.log(user.id)
+                )}
+              </List>
+              {user ? (
+                <React.Fragment>
+                  <Divider />
+                  <List>
+                    <button className="logout-btn" onClick={handleLogOut}>
+                      <ListItem button key={"users"} className={"list-items"}>
+                        <ListItemIcon>
+                          <ExitToApp />
+                        </ListItemIcon>
+                        <ListItemText primary={"Log out"} />
+                      </ListItem>
+                    </button>
+                  </List>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <Divider />
+                  <List>
+                    <Link className="list-items-links" to="/users">
+                      <ListItem button key={"users"} className={"list-items"}>
+                        <ListItemIcon>
+                          <ExitToAppOutlined />
+                        </ListItemIcon>
+                        <ListItemText primary={"Login"} />
+                      </ListItem>
+                    </Link>
+                    <Link className="list-items-links" to="/users">
+                      <ListItem button key={"users"} className={"list-items"}>
+                        <ListItemIcon>
+                          <Person />
+                        </ListItemIcon>
+                        <ListItemText primary={"Register"} />
+                      </ListItem>
+                    </Link>
+                  </List>
+                </React.Fragment>
+              )}
+            </div>
+          </Paper>
         </SwipeableDrawer>
       </React.Fragment>
     </div>

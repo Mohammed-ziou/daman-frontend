@@ -4,6 +4,7 @@ import docService from "./docService";
 const initialState = {
   docs: [],
   doc: { title: "" },
+  count: 0,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -55,7 +56,26 @@ export const getForms = createAsyncThunk(
   async (querys, thunkAPI) => {
     try {
       const token = thunkAPI.getState().auth.user.token;
+      console.log(querys);
       return await docService.getForms(token, querys);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+// get forms count
+export const getFormsCount = createAsyncThunk(
+  "doc/count",
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.user.token;
+      return await docService.getFormsCount(token);
     } catch (error) {
       const message =
         (error.response &&
@@ -170,6 +190,19 @@ const docSlice = createSlice({
         state.doc = action.payload;
       })
       .addCase(updateForm.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getFormsCount.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getFormsCount.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.count = action.payload;
+      })
+      .addCase(getFormsCount.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

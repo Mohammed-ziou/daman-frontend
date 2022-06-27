@@ -1,5 +1,5 @@
 import { CircularProgress } from "@material-ui/core";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
@@ -12,6 +12,7 @@ import {
 import CustomPaginationActionsTable from "./UserPagination";
 
 function Userpage() {
+  const [usersData, setUsersData] = useState([]);
   const { user } = useSelector((state) => state.auth);
   const { users, isLoading, message, isError, isSuccess, isUpdated } =
     useSelector((state) => state.users);
@@ -35,15 +36,16 @@ function Userpage() {
   };
 
   useEffect(() => {
-    if (isError) {
-      console.log(message);
-    }
+    // if (!user.isAdmin) navigate("/");
 
-    if (!user.token) {
-      navigate("/login");
-    }
+    if (isError) console.log(message);
+
+    if (!user.token) navigate("/login");
 
     dispatch(getUsers());
+    console.log(users);
+
+    setUsersData(users);
 
     return () => {
       dispatch(reset());
@@ -51,8 +53,9 @@ function Userpage() {
   }, [user, navigate, isError, message, dispatch]);
 
   useEffect(() => {
+    if (!user.isAdmin) navigate("/");
     dispatch(getUsers());
-  }, [isUpdated, dispatch]);
+  }, [isUpdated, dispatch, navigate]);
 
   if (isLoading) {
     return <CircularProgress />;
